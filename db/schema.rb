@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_30_175002) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_03_214336) do
   create_table "profiles", force: :cascade do |t|
     t.string "username", limit: 255, null: false
     t.boolean "superuser", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["username"], name: "index_profiles_on_username", unique: true
   end
 
   create_table "repositories", force: :cascade do |t|
