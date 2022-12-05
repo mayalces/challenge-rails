@@ -1,0 +1,30 @@
+<%= form_for @profile do |form| %>
+  <% if @errors.present? %>
+    <div class="alert alert-danger errors">
+      <ul>
+        <% @errors.each do |error| %>
+          <li><%= error %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :username %>
+    <%= form.text_field :username, class: "form-control" %>
+  </div>
+
+  <h3>Repositories</h3>
+  <div class="form-group" id="source_id">
+    <%= form.fields_for :repositories do |repository| %>
+      <%= repository.label :name %>
+      <%= repository.text_field :name, class: "form-control" %>
+      <%= repository.label :tags %>
+      <%= repository.text_field :tags, class: "form-control" %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+<% end %>
