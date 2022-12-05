@@ -5,26 +5,18 @@ class ReportsController < ApplicationController
         ActiveRecord::Base.sanitize_sql("%#{params[:tag]}%")
       end
 
-    @profiles = filtered_profiles(filter)
+    @profiles = ReportFilterer.new.filtered_profiles(filter)
 
     return_response(@profiles)
   end
 
-  attr_reader :profiles
+  def external
+    @profiles = ReportService.new.generate
+
+    return_response(@profiles)
+  end
 
   private
-
-  def all_profiles
-    @profiles = Profile.includes(:repositories)
-  end
-
-  def filtered_profiles(filter)
-    return all_profiles if filter.blank?
-
-    all_profiles
-      .where('LOWER(repositories.tags) LIKE ?', "%#{filter.downcase}%")
-      .references(:repositories)
-  end
 
   def return_response(profiles)
     respond_to do |format|

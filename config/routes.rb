@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   root "home#index"
 
   resources :profiles, only: [:create, :new]
-  resources :reports, only: [:index]
+  resources :reports, only: [:index] do
+    get :external, on: :collection
+  end
 end

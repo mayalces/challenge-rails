@@ -1,0 +1,24 @@
+<div class="title-container">
+  <h1>External Report</h1>
+</div>
+
+<div class="profiles">
+  <% @profiles.each do |profile| %>
+    <div class="profile">
+      <div class="thumbnail">
+        <div class="caption">
+          <p><b>Profile ID:</b> <%= profile.id %></p>
+          <p><b>Username:</b> <%= profile.username %></p>
+          <% if profile.repositories.present? %>
+            <b>Repositories:</b>
+            <% profile.repositories.each do |repository| %>
+              <p><b>ID:</b> <%= repository.id %></p>
+              <p><b>Name:</b> <%= repository.name %></p>
+              <p><b>Tags:</b> <%= repository.tags %></p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
